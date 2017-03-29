@@ -1,0 +1,4 @@
+Use following code to generate .py file from .ui file:
+
+command line:
+C:/Users/Weizen/Anaconda3/Lib/site-packages/PyQt4/pyuic4.bat -x {ui file name} -o {py file name}
