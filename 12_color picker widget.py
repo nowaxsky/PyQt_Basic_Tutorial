@@ -4,7 +4,7 @@ from PyQt4 import QtGui, QtCore
 class Window(QtGui.QMainWindow):
 
 	def __init__(self):
-		super(Window, self).__init__()
+		super().__init__()
 		self.setGeometry(50, 50, 500, 300)
 		self.setWindowTitle("PyQt tuts!")
 		self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
@@ -25,11 +25,7 @@ class Window(QtGui.QMainWindow):
 	def home(self):
 		btn = QtGui.QPushButton("Quit",self)
 		btn.clicked.connect(self.close_application)
-		
-		#btn.resize(100,100)
-		#btn.resize(btn.sizeHint())
 		btn.resize(btn.minimumSizeHint())
-		
 		btn.move(0,100)
 		
 		extractAction = QtGui.QAction(QtGui.QIcon('todachoppa.png'),'Flee the Scene', self)
@@ -40,11 +36,11 @@ class Window(QtGui.QMainWindow):
 		
 		fontChoice = QtGui.QAction('Font', self)
 		fontChoice.triggered.connect(self.font_choice)
-		
-		#self.toolBar = self.addToolBar("Font")	#try to delete this line
+		#self.toolBar = self.addToolBar("Font")
 		self.toolBar.addAction(fontChoice)
 		
-		### Add following lines
+		### Add color picker widget
+		#the following line is useless
 		color = QtGui.QColor(0, 0, 0)
 		
 		fontColor = QtGui.QAction('Font bg Color', self)
@@ -56,8 +52,6 @@ class Window(QtGui.QMainWindow):
 		
 		checkBox = QtGui.QCheckBox('Enlarge Window', self)
 		checkBox.move(300,25)
-		#default
-		#checkBox.toggle()
 		checkBox.stateChanged.connect(self.enlarge_Window)
 		
 		self.progress = QtGui.QProgressBar(self)
@@ -71,7 +65,7 @@ class Window(QtGui.QMainWindow):
 		#print(self.style().objectName())
 		###
 		
-		self.styleChoice = QtGui.QLabel("Windows", self)
+		self.styleChoice = QtGui.QLabel("Windows Vista", self)
 		
 		comboBox = QtGui.QComboBox(self)
 		comboBox.addItem("motif")
@@ -85,7 +79,7 @@ class Window(QtGui.QMainWindow):
 		self.styleChoice.move(50, 150)
 		comboBox.activated[str].connect(self.style_choice)
 		
-		### Add following lines
+		### Add a hidden calendar
 		cal = QtGui.QCalendarWidget(self)
 		cal.move(500, 200)
 		cal.resize(200, 200)
@@ -123,8 +117,8 @@ class Window(QtGui.QMainWindow):
 		
 	def close_application(self):
 		choice = QtGui.QMessageBox.question(self, 'Extract!',
-		"Get into the chopper?", 
-		QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+											"Get into the chopper?", 
+											QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
 		
 		if choice == QtGui.QMessageBox.Yes:
 			print("Extracting Naaaaaaooooww!!!!")

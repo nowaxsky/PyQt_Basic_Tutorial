@@ -4,7 +4,7 @@ from PyQt4 import QtGui, QtCore
 class Window(QtGui.QMainWindow):
 
 	def __init__(self):
-		super(Window, self).__init__()
+		super().__init__()
 		self.setGeometry(50, 50, 500, 300)
 		self.setWindowTitle("PyQt tuts!")
 		self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
@@ -25,11 +25,7 @@ class Window(QtGui.QMainWindow):
 	def home(self):
 		btn = QtGui.QPushButton("Quit",self)
 		btn.clicked.connect(self.close_application)
-		
-		btn.resize(100,100)
-		#btn.resize(btn.sizeHint())
-		#btn.resize(btn.minimumSizeHint())
-		
+		btn.resize(btn.minimumSizeHint())
 		btn.move(0,100)
 		
 		extractAction = QtGui.QAction(QtGui.QIcon('todachoppa.png'),'Flee the Scene', self)
@@ -38,32 +34,37 @@ class Window(QtGui.QMainWindow):
 		self.toolBar = self.addToolBar("Extraction")
 		self.toolBar.addAction(extractAction)
 		
+		### Add check box
 		checkBox = QtGui.QCheckBox('Enlarge Window', self)
 		checkBox.move(100,25)
-		#default
-		#checkBox.toggle()
+		
 		checkBox.stateChanged.connect(self.enlarge_Window)
 		
-		self.show()
+		#The .toggle() will set the box on, otherwise the default is off.
+		#checkBox.toggle()
+		###
 		
+		self.show()
+	
+	### Add following lines
 	def enlarge_Window(self, state):
 		if state == QtCore.Qt.Checked:
 			self.setGeometry(50,50,1000,600)
 		else:
 			self.setGeometry(50,50,500,300)
+	###	
 		
 	def close_application(self):
 		choice = QtGui.QMessageBox.question(self, 'Extract!',
-		"Get into the chopper?", 
-		QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+											"Get into the chopper?", 
+											QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
 		
 		if choice == QtGui.QMessageBox.Yes:
 			print("Extracting Naaaaaaooooww!!!!")
 			sys.exit()
 		else:
 			pass
-		
-	
+			
 		
 def run():		
 	app = QtGui.QApplication(sys.argv)

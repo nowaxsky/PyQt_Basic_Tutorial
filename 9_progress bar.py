@@ -4,7 +4,7 @@ from PyQt4 import QtGui, QtCore
 class Window(QtGui.QMainWindow):
 
 	def __init__(self):
-		super(Window, self).__init__()
+		super().__init__()
 		self.setGeometry(50, 50, 500, 300)
 		self.setWindowTitle("PyQt tuts!")
 		self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
@@ -25,11 +25,7 @@ class Window(QtGui.QMainWindow):
 	def home(self):
 		btn = QtGui.QPushButton("Quit",self)
 		btn.clicked.connect(self.close_application)
-		
-		btn.resize(100,100)
-		#btn.resize(btn.sizeHint())
-		#btn.resize(btn.minimumSizeHint())
-		
+		btn.resize(btn.minimumSizeHint())
 		btn.move(0,100)
 		
 		extractAction = QtGui.QAction(QtGui.QIcon('todachoppa.png'),'Flee the Scene', self)
@@ -40,25 +36,28 @@ class Window(QtGui.QMainWindow):
 		
 		checkBox = QtGui.QCheckBox('Enlarge Window', self)
 		checkBox.move(100,25)
-		#default
-		#checkBox.toggle()
 		checkBox.stateChanged.connect(self.enlarge_Window)
 		
+		### Add progress bar
 		self.progress = QtGui.QProgressBar(self)
 		self.progress.setGeometry(200, 80, 250, 20)
 		
+		### Maybe can just use btn2 = QtGui.Q...???
 		self.btn = QtGui.QPushButton("Download",self)
 		self.btn.move(200,120)
 		self.btn.clicked.connect(self.download)
+		###
 		
 		self.show()
-		
+	
+	###	Add following lines
 	def download(self):
 		self.completed = 0
 		
 		while self.completed < 100:
 			self.completed += 0.0001
 			self.progress.setValue(self.completed)
+	###	
 		
 	def enlarge_Window(self, state):
 		if state == QtCore.Qt.Checked:
@@ -68,15 +67,14 @@ class Window(QtGui.QMainWindow):
 		
 	def close_application(self):
 		choice = QtGui.QMessageBox.question(self, 'Extract!',
-		"Get into the chopper?", 
-		QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+											"Get into the chopper?", 
+											QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
 		
 		if choice == QtGui.QMessageBox.Yes:
 			print("Extracting Naaaaaaooooww!!!!")
 			sys.exit()
 		else:
 			pass
-		
 	
 		
 def run():		

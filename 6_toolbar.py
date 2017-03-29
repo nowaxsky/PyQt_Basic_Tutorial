@@ -4,7 +4,7 @@ from PyQt4 import QtGui, QtCore
 class Window(QtGui.QMainWindow):
 
 	def __init__(self):
-		super(Window, self).__init__()
+		super().__init__()
 		self.setGeometry(50, 50, 500, 300)
 		self.setWindowTitle("PyQt tuts!")
 		self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
@@ -25,19 +25,16 @@ class Window(QtGui.QMainWindow):
 	def home(self):
 		btn = QtGui.QPushButton("Quit",self)
 		btn.clicked.connect(self.close_application)
-		
-		btn.resize(100,100)
-		#btn.resize(btn.sizeHint())
-		#btn.resize(btn.minimumSizeHint())
-		
+		btn.resize(btn.minimumSizeHint())
 		btn.move(0,100)
 		
+		### Add tool bar
 		extractAction = QtGui.QAction(QtGui.QIcon('todachoppa.png'),'Flee the Scene', self)
 		extractAction.triggered.connect(self.close_application)
 		
 		self.toolBar = self.addToolBar("Extraction")
 		self.toolBar.addAction(extractAction)
-		
+		###
 		
 		self.show()
 		

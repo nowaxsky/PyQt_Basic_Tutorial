@@ -4,7 +4,7 @@ from PyQt4 import QtGui, QtCore
 class Window(QtGui.QMainWindow):
 
 	def __init__(self):
-		super(Window, self).__init__()
+		super().__init__()
 		self.setGeometry(50, 50, 500, 300)
 		self.setWindowTitle("PyQt tuts!")
 		self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
@@ -25,11 +25,7 @@ class Window(QtGui.QMainWindow):
 	def home(self):
 		btn = QtGui.QPushButton("Quit",self)
 		btn.clicked.connect(self.close_application)
-		
-		#btn.resize(100,100)
-		#btn.resize(btn.sizeHint())
 		btn.resize(btn.minimumSizeHint())
-		
 		btn.move(0,100)
 		
 		extractAction = QtGui.QAction(QtGui.QIcon('todachoppa.png'),'Flee the Scene', self)
@@ -38,7 +34,7 @@ class Window(QtGui.QMainWindow):
 		self.toolBar = self.addToolBar("Extraction")
 		self.toolBar.addAction(extractAction)
 		
-		### Add following lines
+		### Add font widget
 		fontChoice = QtGui.QAction('Font', self)
 		fontChoice.triggered.connect(self.font_choice)
 		
@@ -49,8 +45,6 @@ class Window(QtGui.QMainWindow):
 		
 		checkBox = QtGui.QCheckBox('Enlarge Window', self)
 		checkBox.move(100,25)
-		#default
-		#checkBox.toggle()
 		checkBox.stateChanged.connect(self.enlarge_Window)
 		
 		self.progress = QtGui.QProgressBar(self)
@@ -61,7 +55,7 @@ class Window(QtGui.QMainWindow):
 		self.btn.clicked.connect(self.download)
 		
 		print(self.style().objectName())
-		self.styleChoice = QtGui.QLabel("Windows", self)
+		self.styleChoice = QtGui.QLabel("Windows Vista", self)
 		
 		comboBox = QtGui.QComboBox(self)
 		comboBox.addItem("motif")
@@ -83,7 +77,6 @@ class Window(QtGui.QMainWindow):
 		if valid:
 			self.styleChoice.setFont(font)
 	###
-
 	
 	def style_choice(self, text):
 		self.styleChoice.setText(text)
@@ -104,15 +97,14 @@ class Window(QtGui.QMainWindow):
 		
 	def close_application(self):
 		choice = QtGui.QMessageBox.question(self, 'Extract!',
-		"Get into the chopper?", 
-		QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+											"Get into the chopper?", 
+											QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
 		
 		if choice == QtGui.QMessageBox.Yes:
 			print("Extracting Naaaaaaooooww!!!!")
 			sys.exit()
 		else:
 			pass
-		
 	
 		
 def run():		

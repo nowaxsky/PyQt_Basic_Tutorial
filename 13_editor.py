@@ -4,7 +4,7 @@ from PyQt4 import QtGui, QtCore
 class Window(QtGui.QMainWindow):
 
 	def __init__(self):
-		super(Window, self).__init__()
+		super().__init__()
 		self.setGeometry(50, 50, 500, 300)
 		self.setWindowTitle("PyQt tuts!")
 		self.setWindowIcon(QtGui.QIcon('pythonlogo.png'))
@@ -14,7 +14,7 @@ class Window(QtGui.QMainWindow):
 		extractAction.setStatusTip('Leave The App')
 		extractAction.triggered.connect(self.close_application)
 		
-		### Add following lines
+		### Add editor action
 		openEditor = QtGui.QAction("&Editor", self)
 		openEditor.setShortcut("Ctrl+E")
 		openEditor.setStatusTip('Open Editor')
@@ -27,7 +27,7 @@ class Window(QtGui.QMainWindow):
 		fileMenu = mainMenu.addMenu('&File')
 		fileMenu.addAction(extractAction)
 		
-		### Add following lines
+		### Add menu
 		editorMenu = mainMenu.addMenu("&Editor")
 		editorMenu.addAction(openEditor)
 		###
@@ -37,11 +37,7 @@ class Window(QtGui.QMainWindow):
 	def home(self):
 		btn = QtGui.QPushButton("Quit",self)
 		btn.clicked.connect(self.close_application)
-		
-		#btn.resize(100,100)
-		#btn.resize(btn.sizeHint())
 		btn.resize(btn.minimumSizeHint())
-		
 		btn.move(0,100)
 		
 		extractAction = QtGui.QAction(QtGui.QIcon('todachoppa.png'),'Flee the Scene', self)
@@ -52,11 +48,8 @@ class Window(QtGui.QMainWindow):
 		
 		fontChoice = QtGui.QAction('Font', self)
 		fontChoice.triggered.connect(self.font_choice)
-		
-		#self.toolBar = self.addToolBar("Font")	#try to delete this line
+		#self.toolBar = self.addToolBar("Font")
 		self.toolBar.addAction(fontChoice)
-		
-		color = QtGui.QColor(0, 0, 0)
 		
 		fontColor = QtGui.QAction('Font bg Color', self)
 		fontColor.triggered.connect(self.color_picker)
@@ -65,8 +58,6 @@ class Window(QtGui.QMainWindow):
 		
 		checkBox = QtGui.QCheckBox('Enlarge Window', self)
 		checkBox.move(300,25)
-		#default
-		#checkBox.toggle()
 		checkBox.stateChanged.connect(self.enlarge_Window)
 		
 		self.progress = QtGui.QProgressBar(self)
@@ -76,9 +67,7 @@ class Window(QtGui.QMainWindow):
 		self.btn.move(200,120)
 		self.btn.clicked.connect(self.download)
 		
-		#print(self.style().objectName())
-		
-		self.styleChoice = QtGui.QLabel("Windows", self)
+		self.styleChoice = QtGui.QLabel("Windows Vista", self)
 		
 		comboBox = QtGui.QComboBox(self)
 		comboBox.addItem("motif")
@@ -132,8 +121,8 @@ class Window(QtGui.QMainWindow):
 		
 	def close_application(self):
 		choice = QtGui.QMessageBox.question(self, 'Extract!',
-		"Get into the chopper?", 
-		QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+											"Get into the chopper?", 
+											QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
 		
 		if choice == QtGui.QMessageBox.Yes:
 			print("Extracting Naaaaaaooooww!!!!")
